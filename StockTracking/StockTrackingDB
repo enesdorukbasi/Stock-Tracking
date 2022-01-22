@@ -1,0 +1,32 @@
+CREATE DATABASE StockTrackingDB
+
+CREATE TABLE tblCategory(
+	Id INT GENERATED ALWAYS AS IDENTITY,
+	Name varchar(50),
+	PRIMARY KEY (Id)
+)
+
+CREATE TABLE tblProduct(
+	Id INT GENERATED ALWAYS AS IDENTITY,
+	Name varchar(50),
+	Number int,
+	Price Float,
+	CategoryId int,
+	PRIMARY KEY (Id),
+	CONSTRAINT fk_Category
+      FOREIGN KEY(CategoryId) 
+	  REFERENCES tblCategory(Id)
+	  ON DELETE CASCADE
+)
+
+CREATE TABLE tblSales(
+	Id INT GENERATED ALWAYS AS IDENTITY,
+	ProductId int,
+	Number int,
+	Price float,
+	PRIMARY KEY(Id),
+	CONSTRAINT fk_ProductId
+      FOREIGN KEY(ProductId) 
+	  REFERENCES tblProduct(Id)
+	  ON DELETE CASCADE
+)
